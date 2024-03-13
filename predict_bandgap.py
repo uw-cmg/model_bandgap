@@ -24,14 +24,14 @@ def get_preds_ebars_domains(df_test):
     errs_list = list()
     a = recal_params['a'][0]
     b = recal_params['b'][0]
-    c = recal_params['d'][0]
-    d = recal_params['d'][0]
+    c = recal_params['c'][0]
+    d2 = recal_params['d'][0]
     for i, x in X.iterrows():
         preds_list = list()
         for pred in model.model.estimators_:
             preds_list.append(pred.predict(np.array(x).reshape(1, -1))[0])
         errs_list.append(np.std(preds_list))
-    ebars = a * np.array(errs_list)**3 + b * np.array(errs_list)**2 + c * np.array(errs_list) + d
+    ebars = a * np.array(errs_list)**3 + b * np.array(errs_list)**2 + c * np.array(errs_list) + d2
 
     # Get domains
     with open(os.path.join(d, 'model.dill'), 'rb') as f:
